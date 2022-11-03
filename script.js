@@ -7,12 +7,12 @@ const { resolve } = require('path');
 function parse(path) {
     // Read CSV file into array.
     let rawFile = fs.readFileSync(
-        path, 
+        path,
         'utf-8'
     ).split('\n')
 
     // Separate the header of the CSV file and the body of the CSV file. (will come in handy later)
-    let rawHeader = rawFile.slice(0, 1) 
+    let rawHeader = rawFile.slice(0, 1)
     let rawBody = rawFile.slice(1);
 
     // Read each element of the array and parse individual values out of each string.
@@ -25,19 +25,19 @@ function parse(path) {
     let teamName = '';
     parsedOutput.forEach((item) => {
         if (item[1] !== '') { // array holds value and is not empty
-            teamName = (item[0] !== '') ? item[0] : teamName; 
+            teamName = (item[0] !== '') ? item[0] : teamName;
             item[0] = teamName;
             dataArr.push(item);
-        }  
+        }
     });
-    // Final cleaning (removing carrage return symbol '\r' from uid) 
+    // Final cleaning (removing carrage return symbol '\r' from uid)
     const data = dataArr.map((item) => {
         let endIndex = item.length - 1
         item[endIndex] = item[endIndex].slice(0, -1)
         return item
     });
     //data is clean and can now be converted to JSON.
-    
+
     // Parsing header
     let header = rawHeader[0].split(',')
     let endIndex = header.length - 1
@@ -64,13 +64,13 @@ function parse(path) {
     let finalData = arrayOfJSON.map((item) => {
         delete item['format']
         return item
-    }); 
+    });
 
     // Convert to csv and store in folder called results.
     if (!fs.existsSync('./results')) {
         fs.mkdirSync('./results')
     }
-    let filePath = path.split('/'); 
+    let filePath = path.split('/');
     let fileName = filePath[filePath.length - 1]
     let newName = `${fileName.split('.')[0]}.output.csv`
 
@@ -81,7 +81,7 @@ function parse(path) {
 
 
 
-// Hashing function 
+// Hashing function
 function hashNode(j) {
     return crypto.createHash('sha256').update(j).digest('hex');
 }
@@ -110,7 +110,7 @@ function jsonToCsv(items) {
 function main() {
     let arg = process.argv.slice(2);
     let path = arg[0];
-    if (path === undefined) {
+    if (path === undefined || (path.split('.')[1] !== 'csv')) {
         console.log("Missing csv params: expects node script.js 'path to csv file'");
     } else {
         parse(path);
