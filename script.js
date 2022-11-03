@@ -36,6 +36,11 @@ function parse(path) {
     let header = rawHeader[0].split(',')
     let endIndex = header.length - 1
     header[endIndex] = header[endIndex].slice(0, -1);
+    header = header.map((item) => {
+        let a = item.toLowerCase();  // change header to lowercase
+        let b = a.replace(' ', '_'); // replace whitespace ' ' with '_'
+        return b
+    })
     // header is now clean
 
 
@@ -46,7 +51,18 @@ function parse(path) {
         fs.mkdirSync(location, {recursive: true})
     }
 
-    console.log(header);
+    // Generating JSON file for each entry and storing in a folder called (/json)
+    let arrayOfJSON = []
+    data.forEach((item) => {
+        let obj = {}
+        item.forEach((sub, id) => {
+            obj['format'] = 'CHIP-0007'
+            obj[header[id]] = sub
+        })
+        arrayOfJSON.push(obj)
+    });
+
+    console.log(arrayOfJSON);
 }
 
 parse(path)

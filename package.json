@@ -1,0 +1,20 @@
+{
+  "name": "json-generator",
+  "version": "1.0.0",
+  "description": "Script that generates a CHIP-0007 compatible json with sha256 hashing for each json file. (For HNG9 task)",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceTimmi/JSON-Generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpaceTimmi/JSON-Generator/issues"
+  },
+  "homepage": "https://github.com/SpaceTimmi/JSON-Generator#readme"
+}
