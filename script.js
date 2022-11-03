@@ -61,9 +61,13 @@ function parse(path) {
     // Convert to csv and store in folder called results.
     if (!fs.existsSync('./results')) {
         fs.mkdirSync('./results')
-    } 
+    }
+    let filePath = path.split('/'); 
+    let fileName = filePath[filePath.length - 1]
+    let newName = `${fileName.split('.')[0]}.output.csv`
+
     const csv = jsonToCsv(arrayOfJSON);
-    fs.writeFileSync('./results/result.csv', csv, {encoding: 'utf-8', flag: 'w'});
+    fs.writeFileSync(`./results/${newName}`, csv, {encoding: 'utf-8', flag: 'w'});
     return 0;
 }
 
