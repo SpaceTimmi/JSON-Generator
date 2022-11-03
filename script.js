@@ -22,8 +22,11 @@ function parse(path) {
 
     // Cleaning the data (removing null values, team names and  empty strings)
     const dataArr = [];
+    let teamName = '';
     parsedOutput.forEach((item) => {
         if (item[1] !== '') { // array holds value and is not empty
+            teamName = (item[0] !== '') ? item[0] : teamName; 
+            item[0] = teamName;
             dataArr.push(item);
         }  
     });
@@ -58,6 +61,11 @@ function parse(path) {
         return obj
     });
 
+    let finalData = arrayOfJSON.map((item) => {
+        delete item['format']
+        return item
+    }); 
+
     // Convert to csv and store in folder called results.
     if (!fs.existsSync('./results')) {
         fs.mkdirSync('./results')
@@ -66,7 +74,7 @@ function parse(path) {
     let fileName = filePath[filePath.length - 1]
     let newName = `${fileName.split('.')[0]}.output.csv`
 
-    const csv = jsonToCsv(arrayOfJSON);
+    const csv = jsonToCsv(finalData);
     fs.writeFileSync(`./results/${newName}`, csv, {encoding: 'utf-8', flag: 'w'});
     return 0;
 }
