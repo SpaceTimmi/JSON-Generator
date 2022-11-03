@@ -7,10 +7,9 @@ steps to use the script
 * Install denpendencies `npm install`
 * Run the script with the following commands `node script.js 'path-to-csv-file'` without the quotes '' in your terminal.
 
-  For example, if the csv file is in the download folder:
-  `node script.js ~/Downloads/name-of-file.csv`
-  if the csv file is in the current folder:
-  `node script.js ./name-of-file.csv` and so on.
+  For example:
+  * if the csv file is in the download folder: `node script.js ~/Downloads/name-of-file.csv`
+  * if the csv file is in the current folder: `node script.js ./name-of-file.csv` and so on.
 
 After running the script with the correct parameters, you will find a folder called results in your current direcotry and inside that folder is a result.csv (the new data) 
 
