@@ -1,5 +1,8 @@
 const fs = require('fs');
-const path = './main.csv';
+const crypto = require('crypto');
+const { resolve } = require('path');
+
+//const path = './main.csv';
 
 function parse(path) {
     // Read CSV file into array.
@@ -22,7 +25,7 @@ function parse(path) {
     parsedOutput.forEach((item) => {
         if (item[1] !== '') { // array holds value and is not empty
             dataArr.push(item);
-        }
+        }  
     });
     // Final cleaning (removing carrage return symbol '\r' from uid) 
     const data = dataArr.map((item) => {
@@ -43,26 +46,63 @@ function parse(path) {
     })
     // header is now clean
 
-
-    // Make a directory called json if it doesn't exist already 
-    // (The directory house all of the created json files).
-    let location = './json';
-    if (!fs.existsSync(location)) {
-        fs.mkdirSync(location, {recursive: true})
-    }
-
     // Generating JSON file for each entry and storing in a folder called (/json)
-    let arrayOfJSON = []
-    data.forEach((item) => {
+    let arrayOfJSON = data.map( (item) => {
         let obj = {}
         item.forEach((sub, id) => {
             obj['format'] = 'CHIP-0007'
             obj[header[id]] = sub
         })
-        arrayOfJSON.push(obj)
+        let result = hashNode(JSON.stringify(obj))
+        obj['sha256'] = result
+        return obj
     });
 
-    console.log(arrayOfJSON);
+    // Convert to csv and store in folder called results.
+    if (!fs.existsSync('./results')) {
+        fs.mkdirSync('./results')
+    } 
+    const csv = jsonToCsv(arrayOfJSON);
+    fs.writeFileSync('./results/result.csv', csv, {encoding: 'utf-8', flag: 'w'});
+    return 0;
 }
 
-parse(path)
+
+
+// Hashing function 
+function hashNode(j) {
+    return crypto.createHash('sha256').update(j).digest('hex');
+}
+
+// JSON to csv
+function jsonToCsv(items) {
+  const header = Object.keys(items[0]);
+
+  const headerString = header.join(',');
+
+  // handle null or undefined values here
+  const replacer = (key, value) => value ?? '';
+
+  const rowItems = items.map((row) =>
+    header
+      .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+      .join(',')
+  );
+  // join header and body, and break into separate lines
+  const csv = [headerString, ...rowItems].join('\r\n');
+  return csv;
+}
+
+
+// Main function
+function main() {
+    let arg = process.argv.slice(2);
+    let path = arg[0];
+    if (path === undefined) {
+        console.log("Missing csv params: expects node script.js 'path to csv file'");
+    } else {
+        parse(path);
+        console.log('Success! Check the results folder!');
+    }
+}
+main();

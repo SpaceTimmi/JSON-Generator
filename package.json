@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SpaceTimmi/JSON-Generator/issues"
   },
-  "homepage": "https://github.com/SpaceTimmi/JSON-Generator#readme"
+  "homepage": "https://github.com/SpaceTimmi/JSON-Generator#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
 }
