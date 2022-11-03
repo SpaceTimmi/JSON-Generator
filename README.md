@@ -5,7 +5,7 @@ steps to use the script
 * Clone the repository. `git clone https://github.com/SpaceTimmi/JSON-Generator.git`
 * Navigate into the new folder `cd JSON-Generator`
 * Install denpendencies `npm install`
-* Run the script with the following commands `node script.js 'path-to-csv-file'`
+* Run the script with the following commands `node script.js 'path-to-csv-file'` with out the quotes '' in your terminal.
 
   For example, if the csv file is in the download folder:
   `node script.js ~/Downloads/name-of-file.csv`
