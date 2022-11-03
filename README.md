@@ -8,7 +8,7 @@ steps to use the script
 * Run the script with the following commands `node script.js 'path-to-csv-file'`
 
   For example, if the csv file is in the download folder:
-  `node script.js ~/Downloads.name-of-file.csv`
+  `node script.js ~/Downloads/name-of-file.csv`
 
 After running the script with the correct parameters, you will find a folder called results in your current direcotry and inside that folder is a result.csv (the new data) 
 
