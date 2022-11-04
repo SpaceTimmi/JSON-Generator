@@ -11,6 +11,6 @@ steps to use the script
   * if the csv file is in the download folder: `node script.js ~/Downloads/name-of-file.csv`
   * if the csv file is in the current folder: `node script.js ./name-of-file.csv` and so on.
 
-After running the script with the correct parameters, you will find a folder called results in your current direcotry and inside that folder is a result.csv (the new data) 
+After running the script with the correct parameters, you will find a folder called results in your current directory and inside that folder is a 'name-of-file'.output.csv (the new data) 
 
 
