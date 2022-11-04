@@ -105,12 +105,12 @@ function jsonToCsv(items) {
   return csv;
 }
 
-
 // Main function
 function main() {
     let arg = process.argv.slice(2);
     let path = arg[0];
-    if (path === undefined || (path.split('.')[1] !== 'csv')) {
+    let end = path.length;
+    if (path === undefined || (path.slice((end - 4), end) !== '.csv') ) {
         console.log("Missing csv params: expects node script.js 'path to csv file'");
     } else {
         parse(path);
