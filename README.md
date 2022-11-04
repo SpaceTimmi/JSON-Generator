@@ -1,11 +1,15 @@
 # JSON-Generator
-Script that generates a CHIP-0007 compatible json with sha256 hashing for each json file, and then returns a csv file the hashing as its own columnn. (For HNG9 task)
+A script that generates a CHIP-0007 compatible json with sha256 hashing for each json file, and then returns a csv file the hashing as its own columnn. (For HNG9 task)
 
-steps to use the script
+Requirements for running the script:
+* git     (for installation of git, visit  https://git-scm.com/downloads) 
+* node.js (for instllation of node.js, visit https://nodejs.org/en/download/)
+
+Steps to use the script from your terminal:
 * Clone the repository. `git clone https://github.com/SpaceTimmi/JSON-Generator.git`
 * Navigate into the new folder `cd JSON-Generator`
 * Install denpendencies `npm install`
-* Run the script with the following commands `node script.js 'path-to-csv-file'` without the quotes '' in your terminal.
+* Run the script with the following commands `node script.js 'path-to-csv-file'` without the quotes ''.
 
   For example:
   * if the csv file is in the download folder: `node script.js ~/Downloads/name-of-file.csv`
